@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>:D</title>
+	<style>
+		canvas {
+			border: 1px solid #3c3c3c;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" height="500" width="500"></canvas>
+
+	<script>
+		function dibujar(e) {
+			var canvas = document.getElementById('canvas');
+			var ctx = canvas.getContext('2d');
+			var pos = mousePos(canvas, e);
+			posX = pos.x;
+			posY = pos.y;
+
+			ctx.fillStyle = "#A8FFCC";
+			ctx.fillRect(posX,posY,5,5);
+		}
+
+		window.addEventListener('mousemove', dibujar, false)
+
+		function mousePos(canvas, event) {
+			//hace que la punta del puntero sea desde donde dibuja. sino, luce corrido.
+			var rect = canvas.getBoundingClientRect();
+			return {
+				x: event.clientX - rect.left,
+				y: event.clientY - rect.top,
+			};
+		}
+	</script>
+</body>
+</html>
