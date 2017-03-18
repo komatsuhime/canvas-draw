@@ -19,8 +19,6 @@
 		var ctx = canvas.getContext('2d');
 
 		function init() {
-			
-
 			canvas.addEventListener('mousemove', function (e) {
 				mousePos('move', e)
 			}, false);
@@ -33,6 +31,9 @@
 				mousePos('up', e)
 			}, false);
 
+			canvas.addEventListener('mouseout', function (e) {
+				mousePos('out', e)
+			}, false);
 		}
 
 		function mousePos(mouse, e) {
@@ -57,6 +58,10 @@
 			}
 
 			if (mouse == "up") {
+				press = false;
+			}
+
+			if (mouse == "out") {
 				press = false;
 			}
 		}
