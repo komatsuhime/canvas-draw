@@ -13,27 +13,65 @@
 	<canvas id="canvas" height="500" width="500"></canvas>
 
 	<script>
-		function dibujar(e) {
-			var canvas = document.getElementById('canvas');
-			var ctx = canvas.getContext('2d');
-			var pos = mousePos(canvas, e);
-			posX = pos.x;
-			posY = pos.y;
+		var prevX = 0, prevY = 0, currX = 0, currY = 0;
+		var press = false;
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
 
-			ctx.fillStyle = "#A8FFCC";
-			ctx.fillRect(posX,posY,5,5);
+		function init() {
+			
+
+			canvas.addEventListener('mousemove', function (e) {
+				mousePos('move', e)
+			}, false);
+
+			canvas.addEventListener('mousedown', function (e) {
+				mousePos('down', e)
+			}, false);
+
+			canvas.addEventListener('mouseup', function (e) {
+				mousePos('up', e)
+			}, false);
+
 		}
 
-		window.addEventListener('mousemove', dibujar, false)
+		function mousePos(mouse, e) {
+			if (mouse == "move") {
+				prevX = currX;
+            	prevY = currY;
+				currX = e.clientX - canvas.offsetLeft;
+            	currY = e.clientY - canvas.offsetTop;
 
-		function mousePos(canvas, event) {
-			//hace que la punta del puntero sea desde donde dibuja. sino, luce corrido.
-			var rect = canvas.getBoundingClientRect();
-			return {
-				x: event.clientX - rect.left,
-				y: event.clientY - rect.top,
-			};
+            	if (press == true) {
+            		dibujar();
+            	}
+                
+			}
+
+			if (mouse == "down") {
+				press = true;
+				prevX = currX;
+                prevY = currY;
+                currX = e.clientX - canvas.offsetLeft;
+                currY = e.clientY - canvas.offsetTop;
+			}
+
+			if (mouse == "up") {
+				press = false;
+			}
 		}
+
+		function dibujar() {
+			ctx.beginPath();
+			ctx.moveTo(prevX,prevY);
+			ctx.lineTo(currX,currY);
+			ctx.strokeStyle = "#A8FFCC";
+			ctx.lineWidth = 2;
+        	ctx.stroke();
+        	ctx.closePath();
+		}
+
+		init();
 	</script>
 </body>
 </html>
