@@ -16,6 +16,7 @@
 		<input type="radio" name="sel_color" onclick="selColor(this);" value="gradient">Gradient</input>
 		<input type="radio" name="sel_color" onclick="selColor(this);" value="aquamarine">Aquamarine</input>
 		<input type="radio" name="sel_color" onclick="selColor(this);" value="black" checked>Black</input>
+		<input type="radio" name="sel_color" onclick="selColor(this);" value="random">Random</input>
 	</div>
 
 	<script>
@@ -23,7 +24,9 @@
 		var press = false;
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
-		var color = 0;
+		var color = "000000";
+
+		var stopRandom = false;
 		
 		var sel = "black";
 
@@ -61,15 +64,23 @@
             	if (press == true) {
             		switch	(sel) {
             			case "gradient":
-            				c = parseInt(color, 16) + 0x000001;
+            				// Improve this!...
+            				c = parseInt(color, 16) + 0x000011;
             				color = ("000000" + c.toString(16)).substr(-6);
             				break;
+
             			case "aquamarine":
             				color = "A8FFCC";
             				break;
+
             			case "black":
-            				color: "000000";
+            				color = "000000";
             				break;
+
+            			case "random":
+            				random();
+            				break;
+
             		}
             		console.log(color);
             		dibujar();
@@ -78,6 +89,7 @@
 			}
 
 			if (mouse == "down") {
+				stopRandom = false;
 				press = true;
 				prevX = currX;
                 prevY = currY;
@@ -91,6 +103,23 @@
 
 			if (mouse == "out") {
 				press = false;
+			}
+		}
+
+		function random(){
+
+			var cMax = Math.ceil(255);
+			var cMin = Math.floor(0);
+			var cRandom = "";
+			var cRandomHex = "";
+			color = "";
+
+			if (stopRandom == false) {
+				stopRandom = true;
+				for (var i = 0; i <= 2; i++) {
+					cRandom = Math.floor(Math.random() * (cMax - cMin)) + cMin;
+					color += cRandom.toString(16);
+				}
 			}
 		}
 
