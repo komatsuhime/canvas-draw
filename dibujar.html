@@ -30,12 +30,6 @@
 		
 		var sel = "black";
 
-		function selColor(sel_color) {
-			sel = sel_color.value;
-		}
-
-		//that color I like: 0xA8FFCC;
-
 		function init() {
 			canvas.addEventListener('mousemove', function (e) {
 				mousePos('move', e)
@@ -89,7 +83,6 @@
 			}
 
 			if (mouse == "down") {
-				stopRandom = false;
 				press = true;
 				prevX = currX;
                 prevY = currY;
@@ -106,12 +99,15 @@
 			}
 		}
 
-		function random(){
+		function selColor(sel_color) {
+			stopRandom = false;
+			sel = sel_color.value;
+		}
 
+		function random(){
 			var cMax = Math.ceil(255);
 			var cMin = Math.floor(0);
 			var cRandom = "";
-			var cRandomHex = "";
 			color = "";
 
 			if (stopRandom == false) {
