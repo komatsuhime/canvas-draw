@@ -116,6 +116,7 @@
 					cRandom = Math.floor(Math.random() * (cMax - cMin)) + cMin;
 					color += cRandom.toString(16);
 				}
+				color = ("000000" + color).substr(-6);
 			}
 		}
 
