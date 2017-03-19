@@ -13,10 +13,10 @@
 <body>
 	<canvas id="canvas" height="500" width="500"></canvas>
 	<div>
-		<input type="radio" name="sel_color" onclick="selColor(this);" value="gradient">Gradient</input>
-		<input type="radio" name="sel_color" onclick="selColor(this);" value="aquamarine">Aquamarine</input>
-		<input type="radio" name="sel_color" onclick="selColor(this);" value="black" checked>Black</input>
-		<input type="radio" name="sel_color" onclick="selColor(this);" value="random">Random</input>
+		<input type="button" name="sel_color" onclick="selColor(this);" value="gradient" label="Gradient"> </input>
+		<input type="button" name="sel_color" onclick="selColor(this);" value="aquamarine" label="Aquamarine"> </input>
+		<input type="button" name="sel_color" onclick="selColor(this);" value="black" label="Black"> </input>
+		<input type="button" name="sel_color" onclick="selColor(this);" value="random" label="Random"> </input>
 	</div>
 
 	<script>
@@ -107,16 +107,18 @@
 		function random(){
 			var cMax = Math.ceil(255);
 			var cMin = Math.floor(0);
-			var cRandom = "";
+			
 			color = "";
 
 			if (stopRandom == false) {
 				stopRandom = true;
 				for (var i = 0; i <= 2; i++) {
+					cRandom = "";
 					cRandom = Math.floor(Math.random() * (cMax - cMin)) + cMin;
-					color += cRandom.toString(16);
+					cRandom = ("00" + cRandom.toString(16)).substr(-2);
+					console.log(cRandom);
+					color += cRandom;
 				}
-				color = ("000000" + color).substr(-6);
 			}
 		}
 
