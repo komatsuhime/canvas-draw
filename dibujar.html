@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 	<title>:D</title>
 	<style>
 		canvas {
@@ -11,6 +12,11 @@
 </head>
 <body>
 	<canvas id="canvas" height="500" width="500"></canvas>
+	<div>
+		<input type="radio" name="sel_color" onclick="selColor(this);" value="gradient">Gradient</input>
+		<input type="radio" name="sel_color" onclick="selColor(this);" value="aquamarine">Aquamarine</input>
+		<input type="radio" name="sel_color" onclick="selColor(this);" value="black" checked>Black</input>
+	</div>
 
 	<script>
 		var prevX = 0, prevY = 0, currX = 0, currY = 0;
@@ -18,6 +24,13 @@
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
 		var color = 0;
+		
+		var sel = "black";
+
+		function selColor(sel_color) {
+			sel = sel_color.value;
+		}
+
 		//that color I like: 0xA8FFCC;
 
 		function init() {
@@ -46,8 +59,18 @@
             	currY = e.clientY - canvas.offsetTop;
 
             	if (press == true) {
-            		c = parseInt(color, 16) + 0xF;
-            		color = ("000000" + c.toString(16)).substr(-6);
+            		switch	(sel) {
+            			case "gradient":
+            				c = parseInt(color, 16) + 0x000001;
+            				color = ("000000" + c.toString(16)).substr(-6);
+            				break;
+            			case "aquamarine":
+            				color = "A8FFCC";
+            				break;
+            			case "black":
+            				color: "000000";
+            				break;
+            		}
             		console.log(color);
             		dibujar();
             	}
