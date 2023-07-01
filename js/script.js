@@ -1,15 +1,15 @@
-var prevX = 0,
+let prevX = 0,
 	prevY = 0,
 	currX = 0,
 	currY = 0;
-var press = false;
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-var color = "000000";
+let press = false;
+let canvas = document.getElementById('canvas');
+let ctx = canvas.getContext('2d');
+let color = "000000";
 
-var stopRandom = false;
+let stopRandom = false;
 
-var sel = "black";
+let sel = "black";
 
 function init() {
 	canvas.addEventListener('mousemove', function(e) {
@@ -86,14 +86,14 @@ function selColor(sel_color) {
 }
 
 function random() {
-	var cMax = Math.ceil(255);
-	var cMin = Math.floor(0);
+	let cMax = Math.ceil(255);
+	let cMin = Math.floor(0);
 
 	color = "";
 
 	if (stopRandom == false) {
 		stopRandom = true;
-		for (var i = 0; i <= 2; i++) {
+		for (let i = 0; i <= 2; i++) {
 			cRandom = "";
 			cRandom = Math.floor(Math.random() * (cMax - cMin)) + cMin;
 			cRandom = ("00" + cRandom.toString(16)).substr(-2);
